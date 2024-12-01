@@ -15,9 +15,9 @@ jobs:
     name: Test the code with tf.keras
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - name: Get pip cache dir
@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip setuptools
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('setup.py') }}
@@ -39,7 +39,7 @@ jobs:
         run: |
           pytest --cov=keras_tuner --cov-report xml:coverage.xml
       - name: Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
   multibackend:
     name: Test the code with Keras Core
     strategy:
@@ -48,9 +48,9 @@ jobs:
         backend: [tensorflow, jax, torch]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - name: Get pip cache dir
@@ -59,7 +59,7 @@ jobs:
           python -m pip install --upgrade pip setuptools
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('setup.py') }}
@@ -76,14 +76,14 @@ jobs:
         run: |
           pytest --cov=keras_tuner --cov-report xml:coverage.xml
       - name: Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
   format:
     name: Check the code format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - name: Get pip cache dir
@@ -92,7 +92,7 @@ jobs:
           python -m pip install --upgrade pip setuptools
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('setup.py') }}
@@ -106,9 +106,9 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - name: Get pip cache dir
@@ -117,7 +117,7 @@ jobs:
           python -m pip install --upgrade pip setuptools
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: pip cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('setup.py') }}
@@ -131,9 +131,9 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
     - name: Get pip cache dir
@@ -142,7 +142,7 @@ jobs:
         python -m pip install --upgrade pip setuptools
         echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
     - name: pip cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
         key: ${{ runner.os }}-pip-${{ hashFiles('setup.py') }}
